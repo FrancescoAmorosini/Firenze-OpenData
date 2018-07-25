@@ -22,6 +22,17 @@ h1 {
     letter-spacing: 1.8px;
 }
 
+h3 {
+    font-size: 14px;
+    margin-bottom: 10px;
+    color: #28303b;
+}
+
+h5 {
+    margin-top: 5px;
+    color: #3c4c5b;
+}
+
 /*----------------- FONTS ----------------*/
 
 @font-face {
@@ -86,10 +97,18 @@ h1 {
 }
 
 .searchWrapper {
-    width: 100%;
     display: block;
     margin: auto;
     padding-left: 5%;
+    vertical-align: middle;
+}
+
+.resetIcon {
+    width: 12px;
+    height: 12px;
+    margin-left: 2%;
+    vertical-align: -webkit-baseline-middle;
+    display: none;
 }
 
 .searchIcon {
@@ -104,6 +123,10 @@ h1 {
 
 :-ms-input-placeholder {
     color: rgba(255, 255, 255, 0.72);
+}
+
+#selectedServices {
+    display: none;
 }
 
 /*--------------- OPTION MENU --------------*/
@@ -138,6 +161,7 @@ h1 {
 
 #sideOptions.active {
     left: 0px;
+    z-index: 5;
 }
 
 #meters {
@@ -226,65 +250,19 @@ h1 {
       color: rgba(255, 255, 255, 0.72);
   }
 
-.dropbtn {
-    background-color: #28303b;
-    color: rgba(255, 255, 255, 0.72);
-    font-size: 16px;
-    border: none;
-    cursor: pointer;
-    padding: 6% 9% 6% 0;
-    padding-left: calc(9% + 3px);
-    border-radius: 8px;
-    margin-bottom: 5%;
-}
-
-.dropdown {
-    position: relative;
-    display: inline-block;
-    width: 100%;
-    text-align: center;
-    margin-bottom: 5%;
-}
-
-.dropdown-content {
-    display: none;
-    z-index: 1;
-}
-
-.dropdown-content li {
-    color: rgba(255, 255, 255, 0.72);
-    padding: 3% 4%;
-    text-decoration: none;
-    display: inline-block;
-    cursor: default;
-}
-
-.dropdown-content li:hover {
-    color: rgba(101, 235, 155, 0.95);
-    font-weight: 400;
-}
-
-.dropbtn:after {
-    content: url(../img/down-arrow.png);
-    padding-left: 5px;
-    width: 16px;
-    height: 16px;
-    vertical-align: sub;
-}
-
 .show {
     display: block;
     background-color: #28303b;
 }
 
-#moreOptions {
+.moreOptions {
     width: 90%;
     margin: auto;
     list-style: none;
 }
 
 .optionItem {
-    width: 60%;
+    width: 75%;
     margin: auto;
     margin-bottom: 3%;
     background-color: #3c4c5b;
@@ -354,10 +332,24 @@ h1 {
 /*------------- MAP SEARCHBOX -------------*/
 
 #map {
+    width: 100%;
+    height: 100%;
+}
+
+#mapWrapper {
     height: 100%;
     width: 80%;
     max-width: calc(100% - 288px);
     float: right;
+    position: relative;
+}
+
+#levels {
+    display: none;
+}
+
+#backIcon {
+    display: none;
 }
 
 #infowindow-content .title {
@@ -512,4 +504,179 @@ h1 {
 .service-info {
     width: 16px;
     height: 16px;
+}
+
+.swipe {
+    width: 20px;
+    height: 20px;
+    display: none;
+}
+
+.car {
+    width: 20px;
+    height: 20px;
+    margin-right: 2%;
+}
+
+.walker {
+    width: 20px;
+    height: 20px;
+    margin-right: 2%;
+}
+
+.autobus {
+    width: 20px;
+    height: 20px;
+}
+
+.routeAlternatives {
+    margin-top: 10px;
+}
+
+.alert {
+    position: absolute;
+    bottom: 0;
+    background-color: #e74c3c;
+    width: 100%;
+    color: rgba(255, 255, 255, 0.72);
+    height: 8vh;
+    display: none;
+}
+
+.alertText {
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+}
+
+.resetRoute {
+    border: 2px solid #3c4c5b;
+    border-radius: 4px;
+    background-color: #3c4c5b;
+    color: white;
+    margin-top: 10px;
+    padding: 5px;
+}
+
+#infoCloseButton {
+    width: 37px;
+    height: 37px;
+    position: absolute;
+    right: 0;
+    top: 0;
+    background-color: transparent;
+    z-index: 100000;
+}
+
+/*----------- PHONE PORTRAIT -----------*/
+
+@media (min-width: 320px) and (max-width: 767px) {
+
+    #sidemenu {
+        width: 100%;
+    }
+
+    #sidemenu::-webkit-scrollbar-track {
+        display: none;
+    }
+    
+    #sidemenu::-webkit-scrollbar {
+        display: none;
+    }
+    
+    #sidemenu::-webkit-scrollbar-thumb {
+        display: none;
+    }
+
+    #sideOptions {
+        width: 100%;
+        left: -100%;
+    }
+
+    #sideOptions::-webkit-scrollbar-track {
+        display: none;
+    }
+    
+    #sideOptions::-webkit-scrollbar {
+        display: none;
+    }
+    
+    #sideOptions::-webkit-scrollbar-thumb {
+        display: none;
+    }
+
+    #showMap {
+        display: block;
+    }
+
+    #mapWrapper {
+        height: 100%;
+        width: 100%;
+        max-width: 100%;
+        float: right;
+        position: relative;
+        display: none;
+    }
+
+    #map {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    #levels {
+        display: block;
+        position: absolute;
+        width: 48px;
+        height: 48px;
+        top: 3%;
+        right: 3%;
+    }
+
+    #backIcon {
+        display: block;
+        position: absolute;
+        width: 48px;
+        height: 48px;
+        top: 3%;
+        left: 3%;
+    }
+
+    .service-info {
+        display: none;
+    }
+    
+    .swipe {
+        display: block;
+    }
+
+    .alert {
+        height: 12vh;
+    }
+
+    .alertText {
+        padding: 4% 5%;
+    }
+
+    #selectedServices {
+        display: none;
+        color: rgba(101, 235, 155, .95);
+        border: 3px solid rgba(101, 235, 155, .95);
+        width: 76%;
+        margin: auto;
+        margin-bottom: 5%;
+        padding: 4% 5%;
+        text-align: center;
+    }
+
+    #selectedServices:after {
+        content: url(../img/marker.png);
+        width: 16px;
+        height: 16px;
+        vertical-align: middle;
+    }
+
+    #activeServices {
+        font-size: 18px;
+        font-weight: 600;
+    }
 }

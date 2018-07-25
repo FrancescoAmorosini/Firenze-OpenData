@@ -4,23 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="theme-color" content="#3c4c5b">
+    <meta name="msapplication-navbutton-color" content="#3c4c5b">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#3c4c5b">
     <link rel="stylesheet" type="text/css" href="css/style.css"> 
     <link href="https://fonts.googleapis.com/css?family=Nunito+Sans|Open+Sans:300,400" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
     <title>Firenze OpenData</title>
 </head>
 <body>
-    <!--- BETA VERSION -->
     <div id="sideOptions">
         <img id="cancelIcon" src="img/cancel.png">
         <div id="advancedSearch">
             <h3 id="advancedTitle">Ricerca Avanzata</h3>
-            <h4 id ="advancedService">Centri Assistenziali Anziani Non Autosufficienti</h4>
+            <h4 id ="advancedService"></h4>
         </div>
         <div class="search">
             <div class="searchWrapper">
                 <img class="searchIcon" src="img/searcher.png">
-                <input id="pac-input-options" class="controls" type="text" datatype="google-autocomplete" spellcheck="false" onfocus="this.placeholder = ''" placeholder="Cerca sulla mappa...">
+                <input id="pac-input-options" class="controls" type="text" datatype="google-autocomplete" spellcheck="false" onfocus="this.placeholder = ''" placeholder="Posizionati sulla mappa...">
+                <img class="resetIcon" src="img/close.png" id="resetIconOptions">
                 <div id="searchResultsOptions"></div>
             </div>
         </div>
@@ -31,42 +34,8 @@
                 <span class="range-slider__value">0</span>
                 <span id="meters">metri</span>
             </div>
-            <h5 class="label">Orario di apertura</h5>
-            <div class="dropdown">
-                <button onclick="showOpeningHour()" class="dropbtn" id="opening">08:00</button>
-                <ul id="openingDropdown" class="dropdown-content">
-                    <li id="openingHour">08:00</li>
-                    <li id="openingHour">09:00</li>
-                    <li id="openingHour">15:30</li>
-                    <li id="openingHour">16:00</li>
-                    <li id="openingHour">20:00</li>
-                </ul>
-            </div>
-            <h5 class="label">Orario di chiusura</h5>
-            <div class="dropdown">
-                <button onclick="showClosingHour()" class="dropbtn" id="closing">13:00</button>
-                <ul id="closingDropdown" class="dropdown-content">
-                        <li id="closingHour">09:00</li>
-                        <li id="closingHour">13:00</li>
-                        <li id="closingHour">19:30</li>
-                        <li id="closingHour">20:00</li>
-                        <li id="closingHour">21:00</li>
-                        <li id="closingHour">23:00</li>
-                        <li id="closingHour">00:00</li>
-                </ul>
-            </div>
-            <h5 class="label">Tipologia</h5>
-            <ul id="moreOptions">
-                <li class="optionItem" id="comunale">
-                    <div>Comunale</div>
-                </li>
-                <li class="optionItem lastItem" id="nonComunale">
-                    <div>Non Comunale</div>
-                </li>
-            </ul>
         </div>
     </div>
-    <!-- END OF BETA VERSION-->
     <div id="sidemenu">
         <div id="contentWrapper">
             <h1 id="title">Firenze</h1>
@@ -74,145 +43,184 @@
             <div class="search">
                 <div class="searchWrapper">
                     <img class="searchIcon" src="img/searcher.png">
-                    <input id="pac-input" class="controls" type="text" datatype="google-autocomplete" spellcheck="false" onfocus="this.placeholder = ''" placeholder="Cerca sulla mappa...">
+                    <input id="pac-input" class="controls" type="text" datatype="google-autocomplete" spellcheck="false" onfocus="this.placeholder = ''" placeholder="Posizionati sulla mappa...">
+                    <img class="resetIcon" src="img/close.png" id="resetIconDefault">
                     <div id="searchResults"></div>
                 </div>
+            </div>
+            <div id="selectedServices">
+                Hai selezionato <span id="activeServices"></span> servizi. <br>
+                Visualizzali sulla mappa
             </div>
             <ul id="services">
                 <li class="service" id='farmacie' data-selected = 'false'>
                     <div class="serviceElement">
                         <img src="img/pharmacy.png" class="service-icon" alt="Icona farmacie">
                         <span class="service-name">Farmacie</span>
-                        <span class="service-number">8</span>
+                        <span class="service-number">117</span>
                         <img src="img/info.png" class="service-info" alt="Opzioni avanzate per farmacie">
+                        <img src="img/swipe.png" class="swipe" alt="Swipe sinistra">
                     </div>
                 </li>
                 <li class="service" id='centriAnziani' data-selected = 'false'>
                     <div class="serviceElement">
                         <img src="img/man.png" class="service-icon" alt="Icona uomo anziano">
                         <span class="service-name">Centri Anziani</span>
-                        <span class="service-number">8</span>
+                        <span class="service-number">27</span>
                         <img src="img/info.png" class="service-info" alt="Opzioni avanzate per centri per gli anziani">
+                        <img src="img/swipe.png" class="swipe" alt="Swipe sinistra">
                     </div>
                 </li>
                 <li class="service" id='ospedali' data-selected = 'false'>
                     <div class="serviceElement">
                         <img src="img/hospital.png" class="service-icon" alt="Icona Ospedali">
                         <span class="service-name">Ospedali</span>
-                        <span class="service-number">8</span>
+                        <span class="service-number">18</span>
                         <img src="img/info.png" class="service-info" alt="Opzioni avanzate per ospedali">
+                        <img src="img/swipe.png" class="swipe" alt="Swipe sinistra">
                     </div>
                 </li>
                 <li class="service" id='presidi' data-selected = 'false'>
                     <div class="serviceElement">
                         <img src="img/nurse.png" class="service-icon" alt="Icona presidi ASL">
                         <span class="service-name">Presidi ASL</span>
-                        <span class="service-number">8</span>
+                        <span class="service-number">13</span>
                         <img src="img/info.png" class="service-info" alt="Opzioni avanzate per presidi ASL">
+                        <img src="img/swipe.png" class="swipe" alt="Swipe sinistra">
                     </div>
                 </li>
                 <li class="service" id='disabiliSociali' data-selected = 'false'>
                     <div class="serviceElement">
                         <img src="img/team.png" class="service-icon" alt="Icona centri assistenziali disabili sociali">
                         <span class="service-name">Centri Assistenziali Disabili Sociali</span>
-                        <span class="service-number">8</span>
+                        <span class="service-number">11</span>
                         <img src="img/info.png" class="service-info" alt="Opzioni avanzate centri assistenziali disabili sociali">
+                        <img src="img/swipe.png" class="swipe" alt="Swipe sinistra">
                     </div>
                 </li>
                 <li class="service" id='marginalita' data-selected = 'false'>
                     <div class="serviceElement">
                         <img src="img/boy.png" class="service-icon" alt="Icona centri inclusione sociale">
                         <span class="service-name">Centri Inclusione Sociale</span>
-                        <span class="service-number">8</span>
+                        <span class="service-number">34</span>
                         <img src="img/info.png" class="service-info" alt="Opzioni avanzate centri inclusione sociale">
+                        <img src="img/swipe.png" class="swipe" alt="Swipe sinistra">
                     </div>
                 </li>
                 <li class="service" id='cimiteri' data-selected = 'false'>
                     <div class="serviceElement">
                         <img src="img/cemetery.png" class="service-icon" alt="Icona cimiteri">
                         <span class="service-name">Cimiteri</span>
-                        <span class="service-number">8</span>
+                        <span class="service-number">17</span>
                         <img src="img/info.png" class="service-info" alt="Opzioni avanzate cimiteri">
+                        <img src="img/swipe.png" class="swipe" alt="Swipe sinistra">
                     </div>
                 </li>
                 <li class="service" id='riabilitazione' data-selected = 'false'>
                     <div class="serviceElement">
                         <img src="img/exercise.png" class="service-icon" alt="Icona riabilitazione">
                         <span class="service-name">Centri Riabilitazione</span>
-                        <span class="service-number">8</span>
+                        <span class="service-number">10</span>
                         <img src="img/info.png" class="service-info" alt="Opzioni avanzate centri riabilitazione">
+                        <img src="img/swipe.png" class="swipe" alt="Swipe sinistra">
                     </div>
                 </li>
                 <li class="service" id='anzianiNONauto' data-selected = 'false'>
                     <div class="serviceElement">
                         <img src="img/patient.png" class="service-icon" alt="Icona centri assistenziali anziani non autosufficienti">
                         <span class="service-name">Centri Assistenziali Anziani Non Autosufficienti</span>
-                        <span class="service-number">8</span>
+                        <span class="service-number">50</span>
                         <img src="img/info.png" class="service-info" alt="Opzioni avanzate centri assistenziali anziani non autosufficienti">
+                        <img src="img/swipe.png" class="swipe" alt="Swipe sinistra">
                     </div>
                 </li>
                 <li class="service" id='anzianiAuto' data-selected = 'false'>
                     <div class="serviceElement">
                         <img src="img/woman.png" class="service-icon" alt="Icona centri assistenziali anziani non autosufficienti">
                         <span class="service-name">Centri Assistenziali Anziani Autosufficienti</span>
-                        <span class="service-number">8</span>
+                        <span class="service-number">36</span>
                         <img src="img/info.png" class="service-info" alt="Opzioni avanzate centri assistenziali anziani non autosufficienti">
+                        <img src="img/swipe.png" class="swipe" alt="Swipe sinistra">
                     </div>
                 </li>
                 <li class="service" id='disabiliFisici' data-selected = 'false'>
                     <div class="serviceElement">
                         <img src="img/wheelchair.png" class="service-icon" alt="Icona centri assistenziali disabili fisici">
                         <span class="service-name">Centri Assistenziali Disabili Fisici</span>
-                        <span class="service-number">8</span>
+                        <span class="service-number">4</span>
                         <img src="img/info.png" class="service-info" alt="Opzioni avanzate per centri assistenziali disabili fisici ">
+                        <img src="img/swipe.png" class="swipe" alt="Swipe sinistra">
                     </div>
                 </li>
                 <li class="service" id='dipendenze' data-selected = 'false'>
                     <div class="serviceElement">
                         <img src="img/injection.png" class="service-icon" alt="Icona centri assistenziali dipendenze">
                         <span class="service-name">Centri Assistenziali Dipendenze</span>
-                        <span class="service-number">8</span>
+                        <span class="service-number">16</span>
                         <img src="img/info.png" class="service-info" alt="Opzioni avanzate per centri assistenziali dipendenze">
+                        <img src="img/swipe.png" class="swipe" alt="Swipe sinistra">
                     </div>
                 </li>
                 <li class="service" id='disabiliPsichici' data-selected = 'false'>
                     <div class="serviceElement">
                         <img src="img/brain.png" class="service-icon" alt="Icona centri assistenziali disabili psichici">
                         <span class="service-name">Centri Assistenziali Disabili Psichici</span>
-                        <span class="service-number">8</span>
+                        <span class="service-number">7</span>
                         <img src="img/info.png" class="service-info" alt="Opzioni avanzate centri assistenziali disabili psichici">
+                        <img src="img/swipe.png" class="swipe" alt="Swipe sinistra">
                     </div>
                 </li>
                 <li class="service" id='siast' data-selected = 'false'>
                     <div class="serviceElement">
                         <img src="img/assistent.png" class="service-icon" alt="Icona SIAST">
                         <span class="service-name">SIAST</span>
-                        <span class="service-number">8</span>
+                        <span class="service-number">7</span>
                         <img src="img/info.png" class="service-info" alt="Opzioni avanzate SIAST">
+                        <img src="img/swipe.png" class="swipe" alt="Swipe sinistra">
                     </div>
                 </li>
                 <li class="service" id='saluteMentale' data-selected = 'false'>
                     <div class="serviceElement">
                         <img src="img/psiche.png" class="service-icon" alt="Icona centri salute mentale">
                         <span class="service-name">Centri Salute Mentale</span>
-                        <span class="service-number">8</span>
+                        <span class="service-number">62</span>
                         <img src="img/info.png" class="service-info" alt="Opzioni avanzate centri salute mentale">
+                        <img src="img/swipe.png" class="swipe" alt="Swipe sinistra">
                     </div>
                 </li>
                 <li class="service" id='assistMinori' data-selected = 'false'>
                     <div class="serviceElement">
                         <img src="img/student.png" class="service-icon" alt="Icona centri assistenziali minori">
                         <span class="service-name">Centri Assistenziali Minori</span>
-                        <span class="service-number">8</span>
+                        <span class="service-number">46</span>
                         <img src="img/info.png" class="service-info" alt="Opzioni avanzate centri assistenziali minori">
+                        <img src="img/swipe.png" class="swipe" alt="Swipe sinistra">
                     </div>
                 </li>
             </ul>
         </div>
     </div>
-    <div id="map"></div>
+    <div id="mapWrapper">
+        <div id="map"></div>
+        <img src="img/levels.png" alt="Opzioni Avanzate" id="levels">
+        <img src="img/previous.png" alt="Indietro" id="backIcon">
+        <div class="alert">
+            <p class="alertText">Per ottenere le informazioni stradali devi prima geolocalizzarti o inserire un indirizzo nella barra di ricerca</p>
+        </div>
+    </div>
     <script src="js/mapfunctions.js"></script>
+    <script src="js/desktopAutocomplete.js"></script>
+    <script src="js/mobileAutocomplete.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDh_eySuB0pPcUnJ4qY_N7Vnzse4eRzbJc&libraries=places&callback=initAutocomplete"
-    async defer></script>    
+    async defer></script>
+    <script>
+        setTimeout(function () {
+                    $.when(initAutocomplete).done(function() {
+                    for (var i = 0; i < document.getElementsByClassName('service').length; i++) {
+                        document.getElementsByClassName('service')[i].click();
+                }
+            });
+        }, 500);
+    </script>  
 </body>
 </html>
